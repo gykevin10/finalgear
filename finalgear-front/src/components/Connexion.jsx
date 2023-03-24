@@ -10,10 +10,7 @@ const Connexion = () => {
 
   return (
     <div>
-      <button
-        className="text-3xl cursor-pointer md:hidden"
-        onClick={handleOpen}
-      >
+      <button className="text-3xl cursor-pointer" onClick={handleOpen}>
         <Link href="/login">
           <UserIcon className="w-6 h-6 mt-8" />
         </Link>
