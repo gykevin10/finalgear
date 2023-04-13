@@ -10,15 +10,16 @@ const NextVideos = () => {
         <thead>
           <tr className="border-b-2">
             <td className="flex gap-1">
-              <div className="w-9">
-                <ImageComponent src="/icons/finalgearlogo.jpg" />
-              </div>
+              <ImageComponent
+                className="w-9 m-1"
+                src="/icons/finalgearlogo.jpg"
+              />
               FINAL GEAR
             </td>
             <td>LA GENÈSE DE FINAL FANTASY VII #2 | LA GUERRE DU WUTAI</td>
             <td>
               <ImageComponent
-                className="w-[200px] h-[50px] rounded-lg"
+                className="w-[200px] h-[50px] rounded-lg m-1"
                 src="/FFlogos/ffviitest.png"
               />
             </td>
@@ -26,15 +27,16 @@ const NextVideos = () => {
 
           <tr className="border-b-2">
             <td className="flex gap-1">
-              <div className="w-9">
-                <ImageComponent src="/icons/sephriuslogo.jpg" />
-              </div>
+              <ImageComponent
+                className="w-9 m-1"
+                src="/icons/sephriuslogo.jpg"
+              />
               Sephrius
             </td>
             <td>SQUARE ENIX NEWS - LE FEU DE JUIN SEN#20</td>
             <td>
               <ImageComponent
-                className="w-[200px] h-[50px] rounded-lg"
+                className="w-[200px] h-[50px] rounded-lg m-1"
                 src="/FFlogos/SE.jpg"
               />
             </td>
@@ -42,25 +44,27 @@ const NextVideos = () => {
 
           <tr className="border-b-2">
             <td className="flex gap-1">
-              <div className="w-9">
-                <ImageComponent src="/icons/corsimanialogo.jpg" />
-              </div>
+              <ImageComponent
+                className="w-9 m-1"
+                src="/icons/corsimanialogo.jpg"
+              />
               CORSIMANIA
             </td>
             <td>Final Fantasy XVI : L'Archiduché de Rosalia</td>
             <td>
               <ImageComponent
-                className="w-[200px] h-[50px] rounded-lg"
-                src="/icons/ffxvilogo.webp"
+                className="w-[200px] h-[50px] rounded-lg m-1"
+                src="/FFlogos/ffxvilogo.webp"
               />
             </td>
           </tr>
 
           <tr className="border-b-2">
             <td className="flex gap-1">
-              <div className="w-12">
-                <ImageComponent src="/icons/chocoboinspace.jpg" />
-              </div>
+              <ImageComponent
+                className="w-9 m-1"
+                src="/icons/chocoboinspace.jpg"
+              />
               Chocobos in Space
             </td>
             <td>
@@ -68,7 +72,7 @@ const NextVideos = () => {
             </td>
             <td>
               <ImageComponent
-                className="w-[200px] h-[50px] rounded-lg"
+                className="w-[200px] h-[50px] rounded-lg m-1"
                 src="/FFlogos/ff8test.png"
               />
             </td>
