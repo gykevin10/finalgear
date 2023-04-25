@@ -7,8 +7,8 @@ const letsplay = () => {
       <div className="flex justify-center">
         <iframe
           className="rounded-xl"
-          width="600"
-          height="350"
+          width="500"
+          height="300"
           src="https://www.youtube.com/embed/h52kJFWIJ2M"
           title="Laissez moi vous parler du concert Distant Worlds final fantasy"
           frameborder="0"

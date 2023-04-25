@@ -12,7 +12,7 @@ const Connexion = () => {
     <div>
       <button className="text-3xl cursor-pointer" onClick={handleOpen}>
         <Link href="/login">
-          <UserIcon className="w-6 h-6 mt-8" />
+          <UserIcon className="m-2 w-6 h-6 mt-5 text-white" />
         </Link>
       </button>
     </div>

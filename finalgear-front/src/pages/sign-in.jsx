@@ -67,7 +67,7 @@ const signIn = () => {
 
   return (
     <Page>
-      <div className="h-screen p-1 m-1 flex flex-col items-center rounded-md border-2 border-black bg-cover bg-no-repeat bg-center bg-[url('/background/ffxvi1.jpeg')]">
+      <div className="h-screen p-1 m-1 flex flex-col items-center rounded-md border-2 border-black bg-cover bg-no-repeat bg-center bg-[url('/background/FFXVI1.jpeg')]">
         <ul className={classNames("", errors[0] ? "" : "hidden")}>
           {errors.map((error, i) => (
             <li key={i}>🛑 {error}</li>

@@ -1,25 +1,10 @@
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import { useRouter } from "next/router"
-import * as Yup from "yup"
+import validationSchema from "@/components/Validators"
 import Page from "../components/Page"
-
-const validationSchema = Yup.object().shape({
-  nickName: Yup.string()
-    .min(2, "Trop petit !")
-    .max(12, "Trop long !")
-    .required("champ obligatoire"),
-  email: Yup.string()
-    .email("Email invalide !")
-    .required("L'email est obligatoire !"),
-  password: Yup.string()
-    .required("Le mot de passe est obligatoire !")
-    .min(8, "le mot de passe doit contenir au minimum 8 caractères")
-    .max(50, "le Mot de passe ne peut pas contenir plus de 50 caractères"),
-  acceptTerms: Yup.bool().oneOf(
-    [true],
-    "les conditions d'inscription sont obligatoires"
-  ),
-})
+import { useCallback, useState } from "react"
+import { AxiosError } from "axios"
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"
 
 const initialValues = {
   nickName: "",
@@ -30,19 +15,52 @@ const initialValues = {
 
 const login = () => {
   const router = useRouter()
+  const [errors, setErrors] = useState([])
+  const [visible, setVisiblity] = useState(false)
+
+  const handleVisionOff = () => {
+    setVisiblity(true)
+  }
+  const handleVesionOn = () => {
+    setVisiblity(false)
+  }
   const handleCGU = () => {
     router.push("/termsOfUse")
   }
-  const handleSubmit = (values) => {
-    console.log(123)
-  }
+  const handleSubmit = useCallback(
+    async ({ email, username, displayName, password }) => {
+      console.log(123)
+      setErrors([])
+
+      try {
+        const {
+          data: { count },
+        } = await api.post("/users", { email, username, displayName, password })
+
+        if (count) {
+          router.push("/users/sign-in")
+
+          return
+        }
+      } catch (err) {
+        if (err instanceof AxiosError && err.response?.data?.error) {
+          setErrors(err.response.data.error)
+
+          return
+        }
+
+        setErrors(["Oops. Something went wrong, please try again."])
+      }
+    },
+    [router]
+  )
   const handleConnexion = () => {
     router.push("/sign-in")
   }
 
   return (
     <Page>
-      <div className="h-screen p-1 m-1 flex flex-col items-center rounded-md border-2 border-black bg-cover bg-no-repeat bg-center bg-[url('/background/ffxvi3.jpg')]">
+      <div className="h-screen p-1 m-1 flex flex-col items-center rounded-md border-2 border-black bg-cover bg-no-repeat bg-center bg-[url('/background/FFXVI3.jpeg')]">
         <div>
           <h1 className="text-white text-center text-4xl font-bold mb-5 underline">
             Inscription
@@ -82,20 +100,33 @@ const login = () => {
                     className="text-red-600"
                   />
                 </div>
+
                 <div className="flex flex-col">
                   <label className="text-white">Mot de passe :</label>
-                  <Field
-                    type="password"
-                    id="password"
-                    name="password"
-                    className="border-2 border-black px-2 rounded"
-                  />
+                  <div className="flex items-center justify-between">
+                    <Field
+                      type={visible ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      className="border-2 border-black px-2 rounded"
+                    />
+                    {visible ? (
+                      <span onClick={handleVesionOn}>
+                        <EyeIcon className="w-6 h-6 bg-white hover:cursor-pointer" />
+                      </span>
+                    ) : (
+                      <span onClick={handleVisionOff}>
+                        <EyeSlashIcon className="w-6 h-6 bg-white hover:cursor-pointer" />
+                      </span>
+                    )}
+                  </div>
                   <ErrorMessage
                     name="password"
                     component="small"
                     className="text-red-600"
                   />
                 </div>
+
                 <div className="flex flex-col">
                   <div>
                     <Field
@@ -134,6 +165,13 @@ const login = () => {
                     Connexion
                   </button>
                 </div>
+                {errors.length ? (
+                  <div className="rounded-lg border-4 border-red-600 text-white mb-4 flex flex-col gap-4 p-4">
+                    {errors.map((error) => (
+                      <p key={error}>{error}</p>
+                    ))}
+                  </div>
+                ) : null}
               </Form>
             )}
           </Formik>

@@ -7,10 +7,7 @@ const finalfantasyvii = () => {
       <div className="flex justify-center">
         <h1 className="font-bold italic mb-3">
           FINAL FANTASY VII
-          <ImageComponent
-            className="w-36 item-center"
-            src="/FFlogos/ffvii.png"
-          />
+          <ImageComponent className="w-36" src="/FFlogos/ffvii.png" />
         </h1>
       </div>
 
