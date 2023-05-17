@@ -1,5 +1,5 @@
-import { pbkdf2Sync, randomBytes } from "crypto";
-import config from "./config.js";
+import { pbkdf2Sync, randomBytes } from "crypto"
+import config from "./config.js"
 
 const hashPassword = (
   password,
@@ -13,6 +13,6 @@ const hashPassword = (
     "hex"
   ),
   salt,
-];
+]
 
-export default hashPassword;
+export default hashPassword

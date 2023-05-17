@@ -1,12 +1,12 @@
-import express, { Router } from "express";
+import express, { Router } from "express"
 
 const makeRoutes = (basePath, callback) => {
-  const router = Router();
+  const router = Router()
 
   return ({ app }) => {
-    app.use(basePath, express.json());
-    app.use(basePath, callback({ router }));
-  };
-};
+    app.use(basePath, express.json())
+    app.use(basePath, callback({ router }))
+  }
+}
 
-export default makeRoutes;
+export default makeRoutes

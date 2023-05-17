@@ -1,7 +1,7 @@
-import filterDBResult from "../filterDBResult.js";
-import hashPassword from "../hashPassword.js";
-import makeRoutes from "../makeRoutes.js";
-import validate from "../middlewares/validate.js";
+import filterDBResult from "../filterDBResult.js"
+import hashPassword from "../hashPassword.js"
+import makeRoutes from "../makeRoutes.js"
+import validate from "../middlewares/validate.js"
 import {
   validateDisplayName,
   validateEmail,
@@ -10,7 +10,7 @@ import {
   validateOffset,
   validatePassword,
   validateUsername,
-} from "../validators.js";
+} from "../validators.js"
 
 const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
   // CREATE
@@ -25,8 +25,8 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
       },
     }),
     async (req, res) => {
-      const { email, username, displayName, password } = req.body;
-      const [passwordHash, passwordSalt] = hashPassword(password);
+      const { email, username, displayName, password } = req.body
+      const [passwordHash, passwordSalt] = hashPassword(password)
 
       const user = await db("users")
         .insert({
@@ -36,11 +36,11 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
           passwordHash,
           passwordSalt,
         })
-        .returning("*");
+        .returning("*")
 
-      res.send({ result: filterDBResult([user]), count: 1 });
+      res.send({ result: filterDBResult([user]), count: 1 })
     }
-  );
+  )
   // READ collection
   router.get(
     "/",
@@ -51,13 +51,13 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
       },
     }),
     async (req, res) => {
-      const { limit, offset } = req.locals.query;
-      const users = await db("users").limit(limit).offset(offset);
-      const [{ count }] = await db("users").count();
+      const { limit, offset } = req.locals.query
+      const users = await db("users").limit(limit).offset(offset)
+      const [{ count }] = await db("users").count()
 
-      res.send({ result: filterDBResult(users), count });
+      res.send({ result: filterDBResult(users), count })
     }
-  );
+  )
   // READ single
   router.get(
     "/:username",
@@ -67,12 +67,12 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
       },
     }),
     async (req, res) => {
-      const { username } = req.params;
-      const user = await db("users").findOne({ username }).throwIfNotFound();
+      const { username } = req.params
+      const user = await db("users").findOne({ username }).throwIfNotFound()
 
-      res.send({ result: filterDBResult([user]), count: 1 });
+      res.send({ result: filterDBResult([user]), count: 1 })
     }
-  );
+  )
   // UPDATE partial
   router.patch(
     "/:userId",
@@ -92,22 +92,22 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
         params: { userId },
         body: { email, username, password, displayName },
         session,
-      } = req;
+      } = req
 
       if (userId !== session.user.id) {
-        hasAccess(req.session, "ADMIN");
+        hasAccess(req.session, "ADMIN")
       }
 
-      const user = await db("users").findById(userId).throwIfNotFound();
+      const user = await db("users").findById(userId).throwIfNotFound()
 
-      let passwordHash;
-      let passwordSalt;
+      let passwordHash
+      let passwordSalt
 
       if (password) {
-        const [hash, salt] = hashPassword(password);
+        const [hash, salt] = hashPassword(password)
 
-        passwordHash = hash;
-        passwordSalt = salt;
+        passwordHash = hash
+        passwordSalt = salt
       }
 
       const updatedUser = await user
@@ -120,11 +120,11 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
           passwordSalt,
           updatedAt: new Date(),
         })
-        .returning("*");
+        .returning("*")
 
-      res.send({ result: filterDBResult([updatedUser]), count: 1 });
+      res.send({ result: filterDBResult([updatedUser]), count: 1 })
     }
-  );
+  )
   //PATCH ADMIN
   router.patch(
     "/:userId/role",
@@ -140,9 +140,9 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
       const {
         params: { userId },
         body: { role },
-      } = req;
+      } = req
 
-      const user = await db("users").findById(userId).throwIfNotFound();
+      const user = await db("users").findById(userId).throwIfNotFound()
 
       const updatedRole = await user
         .$query()
@@ -150,11 +150,11 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
           role,
           updatedAt: new Date(),
         })
-        .returning("*");
+        .returning("*")
 
-      res.send({ result: updatedRole, count: 1 });
+      res.send({ result: updatedRole, count: 1 })
     }
-  );
+  )
   // DELETE
   router.delete(
     "/:userId",
@@ -164,17 +164,17 @@ const makeUsersRoutes = makeRoutes("/users", ({ router }) => {
       },
     }),
     async (req, res) => {
-      hasAccess("ADMIN");
+      hasAccess("ADMIN")
 
-      const { userId } = req.params;
+      const { userId } = req.params
 
-      const user = await db("users").deleteById(userId).throwIfNotFound();
+      const user = await db("users").deleteById(userId).throwIfNotFound()
 
-      res.send({ result: filterDBResult([user]), count: 1 });
+      res.send({ result: filterDBResult([user]), count: 1 })
     }
-  );
+  )
 
-  return router;
-});
+  return router
+})
 
-export default makeUsersRoutes;
+export default makeUsersRoutes

@@ -5,15 +5,16 @@ import Page from "../components/Page"
 import { useCallback, useState } from "react"
 import { AxiosError } from "axios"
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"
+import api from "@/services/api"
 
 const initialValues = {
-  nickName: "",
+  userame: "",
   email: "",
   password: "",
   acceptTerms: false,
 }
 
-const login = () => {
+const signUp = () => {
   const router = useRouter()
   const [errors, setErrors] = useState([])
   const [visible, setVisiblity] = useState(false)
@@ -60,7 +61,7 @@ const login = () => {
 
   return (
     <Page>
-      <div className="h-screen p-1 m-1 flex flex-col items-center rounded-md border-2 border-black bg-cover bg-no-repeat bg-center bg-[url('/background/FFXVI3.jpeg')]">
+      <div className="h-screen flex flex-col items-center border-2 border-black bg-cover bg-no-repeat bg-center bg-[url('/background/FFXVI3.jpeg')]">
         <div>
           <h1 className="text-white text-center text-4xl font-bold mb-5 underline">
             Inscription
@@ -76,16 +77,17 @@ const login = () => {
                   <label className="text-white"> Pseudo :</label>
                   <Field
                     type="text"
-                    id="nickName"
-                    name="nickName"
+                    id="username"
+                    name="username"
                     className="border-2 border-black px-2 rounded"
                   />
                   <ErrorMessage
-                    name="nickName"
+                    name="username"
                     component="small"
                     className="text-red-600"
                   />
                 </div>
+
                 <div className="flex flex-col">
                   <label className="text-white">Email :</label>
                   <Field
@@ -181,4 +183,4 @@ const login = () => {
   )
 }
 
-export default login
+export default signUp

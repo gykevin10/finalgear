@@ -12,31 +12,16 @@ const NextVideos = () => {
             <td className="flex gap-1">
               <ImageComponent
                 className="w-9 m-1"
-                src="/icons/finalgearlogo.jpg"
-              />
-              FINAL GEAR
-            </td>
-            <td>LA GENÈSE DE FINAL FANTASY VII #2 | LA GUERRE DU WUTAI</td>
-            <td>
-              <ImageComponent
-                className="w-[200px] h-[50px] rounded-lg m-1"
-                src="/FFlogos/ffviitest.png"
-              />
-            </td>
-          </tr>
-
-          <tr className="border-b-2">
-            <td className="flex gap-1">
-              <ImageComponent
-                className="w-9 m-1"
                 src="/icons/sephriuslogo.jpg"
               />
               Sephrius
             </td>
-            <td>SQUARE ENIX NEWS - LE FEU DE JUIN SEN#20</td>
-            <td>
+            <td className="md:w-2/3">
+              SQUARE ENIX NEWS - LE FEU DE JUIN SEN#20
+            </td>
+            <td className="md:w-1/3">
               <ImageComponent
-                className="w-[200px] h-[50px] rounded-lg m-1"
+                className="w-full h-auto rounded-lg m-1"
                 src="/FFlogos/SE.jpg"
               />
             </td>
@@ -50,10 +35,12 @@ const NextVideos = () => {
               />
               CORSIMANIA
             </td>
-            <td>Final Fantasy XVI : L'Archiduché de Rosalia</td>
-            <td>
+            <td className="md:w-2/3">
+              Final Fantasy XVI : L'Archiduché de Rosalia
+            </td>
+            <td className="md:w-1/3">
               <ImageComponent
-                className="w-[200px] h-[50px] rounded-lg m-1"
+                className="w-full h-auto rounded-lg m-1"
                 src="/FFlogos/ffxvilogo.webp"
               />
             </td>
@@ -67,12 +54,12 @@ const NextVideos = () => {
               />
               Chocobos in Space
             </td>
-            <td>
+            <td className="md:w-2/3">
               Final Fantasy VIII #01: G-Forces et magies (Guide stratégique)
             </td>
-            <td>
+            <td className="md:w-1/3">
               <ImageComponent
-                className="w-[200px] h-[50px] rounded-lg m-1"
+                className="w-full h-auto rounded-lg m-1"
                 src="/FFlogos/ff8test.png"
               />
             </td>
