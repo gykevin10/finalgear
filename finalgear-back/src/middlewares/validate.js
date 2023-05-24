@@ -12,9 +12,9 @@ const validate = (validators) => async (req, res, next) => {
       abortEarly: false,
     })
 
-    req.locals.params = params
-    req.locals.query = query
-    req.locals.body = body
+    req.params = params
+    req.query = query
+    req.body = body
   } catch (err) {
     res.status(420).send({ error: err.errors })
 

@@ -1,28 +1,28 @@
-import jsonwebtoken from "jsonwebtoken";
-import config from "../config.js";
+import jsonwebtoken from "jsonwebtoken"
+import config from "../config.js"
 
 const auth = (req, res, next) => {
   const {
     headers: { authorization = "" },
-  } = req;
+  } = req
 
-  const jwt = authorization.slice(7);
+  const jwt = authorization.slice(7)
 
   try {
-    const payload = jsonwebtoken.verify(jwt, config.security.jwt.secret);
+    const payload = jsonwebtoken.verify(jwt, config.security.jwt.secret)
 
-    req.session = payload;
+    req.session = payload
 
-    next();
+    next()
   } catch (err) {
     if (err instanceof jsonwebtoken.JsonWebTokenError) {
-      res.status(403).send({ error: ["Forbidden."] });
+      res.status(403).send({ error: ["Forbidden."] })
 
-      return;
+      return
     }
 
-    res.status(500).send({ error: ["Oops, Something went wrong."] });
+    res.status(500).send({ error: ["Oops, Something went wrong."] })
   }
-};
+}
 
 export default auth
