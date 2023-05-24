@@ -1,11 +1,11 @@
 import Navbar from "@/components/Navbar"
-import Connexion from "./Connexion"
+import Status from "./Status"
 
 const Header = () => {
   return (
     <header className="flex justify-between bg-gray-800">
       <Navbar />
-      <Connexion />
+      <Status />
     </header>
   )
 }

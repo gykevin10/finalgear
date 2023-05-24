@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { Bars3Icon, XCircleIcon } from "@heroicons/react/24/solid"
+import Button from "@/components/Button"
+import { useRouter } from "next/router"
 
 const navMenu = [
   {
@@ -22,6 +24,10 @@ const navMenu = [
 ]
 
 const Navbar = () => {
+  const router = useRouter()
+  const handleClick = () => {
+    router.push("/")
+  }
   const [isOpen, setIsOpen] = useState(false)
   const [menu, setMenu] = useState(navMenu) // Ajouter un état pour le menu
 
@@ -58,9 +64,12 @@ const Navbar = () => {
                   src="https://pbs.twimg.com/profile_images/1417635808853565440/d6fFCTfg_400x400.jpg"
                   alt="finalgear"
                 />
-                <h1 className="font-blod text-2xl cursor-pointer font-[poppins] text-white underline">
+                <button
+                  className="font-blod text-2xl font-[poppins] text-white underline"
+                  onClick={handleClick}
+                >
                   FINAL GEAR
-                </h1>
+                </button>
               </div>
             </div>
             <div className="hidden md:block">

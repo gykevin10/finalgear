@@ -1,18 +1,34 @@
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import { useRouter } from "next/router"
-import validationSchema from "@/components/Validators"
 import Page from "../components/Page"
 import { useCallback, useState } from "react"
 import { AxiosError } from "axios"
+import * as yup from "yup"
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"
 import api from "@/services/api"
+import {
+  validateAcceptTerms,
+  validateDisplayName,
+  validateEmail,
+  validatePassword,
+  validateUsername,
+} from "@/validators"
 
 const initialValues = {
-  userame: "",
+  username: "",
+  displayName: "",
   email: "",
   password: "",
   acceptTerms: false,
 }
+
+const validationSchema = yup.object().shape({
+  email: validateEmail.required(),
+  displayName: validateDisplayName.required(),
+  username: validateUsername.required(),
+  password: validatePassword.required(),
+  acceptTerms: validateAcceptTerms.required(),
+})
 
 const signUp = () => {
   const router = useRouter()
@@ -30,7 +46,6 @@ const signUp = () => {
   }
   const handleSubmit = useCallback(
     async ({ email, username, displayName, password }) => {
-      console.log(123)
       setErrors([])
 
       try {
@@ -39,7 +54,7 @@ const signUp = () => {
         } = await api.post("/users", { email, username, displayName, password })
 
         if (count) {
-          router.push("/users/sign-in")
+          router.push("/sign-in")
 
           return
         }
@@ -71,18 +86,32 @@ const signUp = () => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
           >
-            {({ resetForm }) => (
+            {({ isSubmitting, isValid, resetForm }) => (
               <Form>
                 <div className="flex flex-col">
-                  <label className="text-white"> Pseudo :</label>
+                  <div className="flex flex-col">
+                    <label className="text-white">Username :</label>
+                    <Field
+                      type="text"
+                      id="username"
+                      name="username"
+                      className="border-2 border-black px-2 rounded"
+                    />
+                    <ErrorMessage
+                      name="username"
+                      component="small"
+                      className="text-red-600"
+                    />
+                  </div>
+                  <label className="text-white">DisplayName :</label>
                   <Field
                     type="text"
-                    id="username"
-                    name="username"
+                    id="displayName"
+                    name="displayName"
                     className="border-2 border-black px-2 rounded"
                   />
                   <ErrorMessage
-                    name="username"
+                    name="displayName"
                     component="small"
                     className="text-red-600"
                   />
@@ -155,6 +184,8 @@ const signUp = () => {
 
                 <div className="flex justify-between mt-2">
                   <button
+                    type="submit"
+                    disabled={isSubmitting || !isValid}
                     onClick={handleSubmit}
                     className="p-1 text-white font-bold border-black border-2"
                   >

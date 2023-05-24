@@ -68,9 +68,16 @@ const signIn = () => {
   return (
     <Page>
       <div className="h-screen p-1 m-1 flex flex-col items-center rounded-md border-2 border-black bg-cover bg-no-repeat bg-center bg-[url('/background/FFXVI1.jpeg')]">
-        <ul className={classNames("", errors[0] ? "" : "hidden")}>
+        <ul
+          className={classNames(
+            `mx-auto mt-4 w-1/2 rounded-lg border-2 border-red-600 bg-red-500/30`,
+            ` ${errors[0] ? "" : "hidden"}`
+          )}
+        >
           {errors.map((error, i) => (
-            <li key={i}>🛑 {error}</li>
+            <li key={i} className="p-1 text-center text-white">
+              🛑 {error}
+            </li>
           ))}
         </ul>
         <h1 className="text-white text-center text-4xl font-bold mb-5 underline">
@@ -85,7 +92,7 @@ const signIn = () => {
           {({ isSubmitting, isValid }) => (
             <Form>
               <div className="flex flex-col">
-                <label className="text-white">Email :</label>
+                <label className="text-white">Email or Username :</label>
                 <Field
                   type="input"
                   id="email"
