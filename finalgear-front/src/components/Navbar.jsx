@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { Bars3Icon, XCircleIcon } from "@heroicons/react/24/solid"
-import Button from "@/components/Button"
 import { useRouter } from "next/router"
 
 const navMenu = [
@@ -20,7 +19,7 @@ const navMenu = [
   { parent: "Iceberg", href: "/iceberg" },
   { parent: "Les dossiers de Corcicasse", href: "/corsimania" },
   { parent: "Triple Triad FFXIV", href: "/cardsCollection" },
-  { parent: "Wordpress", href: "/notion" },
+  { parent: "notion", href: "/notion" },
 ]
 
 const Navbar = () => {

@@ -1,3 +1,4 @@
+import Loading from "@/components/Loading"
 import Page from "@/components/Page"
 import axios from "axios"
 import Link from "next/link"
@@ -17,7 +18,7 @@ const cardsCollection = () => {
   }, [setCards])
 
   if (!cards) {
-    return <div className="">LOADING...</div>
+    return <Loading />
   }
 
   return (
