@@ -1,138 +1,99 @@
-import ImageComponent from "@/components/ImageComponent"
 import Page from "@/components/Page"
-import { ArrowLeftIcon } from "@heroicons/react/24/solid"
-import { ErrorMessage, Field, Form, Formik } from "formik"
-import * as Yup from "yup"
-import { useCallback } from "react"
+import { ExclamationTriangleIcon } from "@heroicons/react/24/solid"
+import { useCallback, useState } from "react"
 import api from "@/services/api"
-import FormField from "@/components/FormField"
-import Button from "@/components/Button"
+import { useRouter } from "next/router"
+import { useAppContext } from "@/components/AppContext"
+import Link from "next/link"
 
-const validationSchema = Yup.object().shape({
-  nickName: Yup.string()
-    .min(2, "Trop petit !")
-    .max(12, "Trop long !")
-    .required("champ obligatoire"),
-  email: Yup.string()
-    .email("Email invalide !")
-    .required("L'email est obligatoire !"),
-})
-
-const initialValues = {
-  avatar: "",
-  avatarFile: "",
-  nickName: "",
-  email: "",
-  password: "",
-  acceptTerms: false,
-}
 const settings = () => {
-  const handleSubmit = useCallback(async ({ avatarFile }) => {
-    const result = await api.post(
-      "/users/avatar",
-      { avatar: avatarFile },
-      { headers: { "Content-Type": "multipart/form-data" } }
-    )
+  const [isactive, setIsactive] = useState(false)
+  const {
+    state: { session },
+  } = useAppContext()
+  const router = useRouter()
+  const { setSession } = useAppContext()
+  const handleActive = () => {
+    setIsactive(true)
+  }
+  const handleCancel = () => {
+    setIsactive(false)
+  }
 
-    console.log(result)
-  }, [])
+  const handleDelete = useCallback(async () => {
+    const {
+      data: { count },
+    } = await api.delete(`/users/${session.user.id}`)
+
+    if (count) {
+      setSession()
+      router.push("/")
+
+      return
+    }
+  }, [router, session, setSession])
 
   return (
     <Page>
-      <h1 className="text-2xl font-bold text-center">Settings</h1>
-      <Button className="flex mb-3" type="submit">
-        <ArrowLeftIcon className="w-7 font-bold" />
-        RETOUR
-      </Button>
-
-      <div className="bg-blue-600">
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ resetForm }) => (
-            <Form className="flex gap-4" encType="multipart/form-data">
-              <div className="w-64 flex flex-col bg-red-700">
-                <label className="text-black"> Pseudo :</label>
-                <Field
-                  type="text"
-                  id="nickName"
-                  name="nickName"
-                  className="border-2 border-black bg-gray-300 px-2 rounded"
-                />
-                <ErrorMessage
-                  name="nickName"
-                  component="small"
-                  className="text-red-600"
-                />
-                <label className="text-black">Email :</label>
-                <Field
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="border-2 border-black bg-gray-300 px-2 rounded"
-                />
-                <ErrorMessage
-                  name="email"
-                  component="small"
-                  className="text-red-600"
-                />
+      <div className="p-10 h-full bg-cover bg-no-repeat bg-center bg-[url('/background/crisiscorereunion.webp')]">
+        <h1 className="text-2xl font-bold text-center">Settings</h1>
+        <div>
+          <h2 className="text-xl font-bold">Profil :</h2>
+          {session ? (
+            <div className="px-5 flex flex-col gap-5 border-2 border-black w-52">
+              <div className="text-center font-bond underline">
+                {session.user.role === "ADMIN" ? (
+                  <h3 className=" skew-y-12">ADMINISRATOR</h3>
+                ) : null}
               </div>
-              <div className="bg-green-600 w-64 space-y-2">
-                <FormField name="avatar" type="file" />
-                <div className="flex justify-center">
-                  <Button type="submit">SAVE</Button>
+              <h4>Name : {session.user.username}</h4>
+              <h5>DisplayName : {session.user.displayName}</h5>
+              <h6>Email : {session.user.email}</h6>
+              <div className="flex">
+                <div className="flex gap-5 justify-center mb-3">
+                  <Link
+                    className="mt-5 px-3 py-2 font-bold text-white text-xs bg-blue-700 active:bg-blue-600 border-2 border-blue-700 rounded"
+                    href="/user-update"
+                  >
+                    Modify
+                  </Link>
+                  <button
+                    className="mt-5 px-3 py-2 font-bold text-white text-xs bg-red-700 active:bg-red-600 border-2 border-red-700 rounded"
+                    isactive={isactive}
+                    onClick={handleActive}
+                  >
+                    Delete
+                  </button>
                 </div>
+
+                {isactive && (
+                  <div className="w-full h-screen absolute top-0 left-0 p-3 rounded-xl flex flex-col items-center">
+                    <section className="flex flex-col items-center gap-5 h-64 w-64 mt-[150px] pt-10 bg-black bg-opacity-60 rounded-2xl">
+                      <ExclamationTriangleIcon className="text-white w-20 h-20" />
+                      <p className="text-white font-bold text-2xl pb-2 text-center">
+                        ARE YOU SURE !?
+                      </p>
+                      <div className="flex gap-5 mb-3">
+                        <button
+                          className="mt-5 px-3 py-2 font-bold text-white text-xs bg-blue-700 active:bg-blue-600 border-2 border-blue-700 rounded"
+                          onClick={handleCancel}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="mt-5 px-3 py-2 font-bold text-white text-xs bg-red-700 active:bg-red-600 border-2 border-red-700 rounded"
+                          onClick={handleDelete}
+                        >
+                          Confirm
+                        </button>
+                      </div>
+                    </section>
+                  </div>
+                )}
               </div>
-            </Form>
-          )}
-        </Formik>
-      </div>
-      <Formik onSubmit={handleSubmit}>
-        <Form>
-          <div className="flex flex-col w-72">
-            <label className="text-black">Pseudo Discord :</label>
-            <div className="flex gap-x-2">
-              <ImageComponent src="/icons/discord.png" className="w-7" />
-              <Field
-                type="text"
-                id="pseudo discord"
-                name="pseudo discord"
-                className="w-screen border-2 border-black bg-gray-300 px-2 rounded"
-                placeholder="Entrer votre pseudo Discord"
-              />
             </div>
-            <ErrorMessage
-              name="pseudo discord"
-              component="small"
-              className="text-red-600"
-            />
-          </div>
-          <div className="flex flex-col w-72">
-            <label className="form-check-label text-black">
-              Pseudo FFXIV :
-            </label>
-            <div className="flex gap-x-2">
-              <ImageComponent src="/images/FFXIVLOGO.png" className="w-7" />
-              <Field
-                type="text"
-                id="pseudo ffxiv"
-                name="pseudo ffxiv"
-                className="w-screen border-2 border-black bg-gray-300 px-2 rounded"
-                placeholder="Entrer votre pseudo FFXIV"
-              />
-            </div>
-            <ErrorMessage
-              name="pseudo ffxiv"
-              component="small"
-              className="text-red-600"
-            />
-          </div>
-        </Form>
-      </Formik>
-      <div className="m-3 flex justify-center">
-        <Button type="submit">VALIDER</Button>
+          ) : null}
+        </div>
       </div>
     </Page>
   )

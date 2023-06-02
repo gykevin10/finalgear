@@ -1,6 +1,6 @@
 import ImageComponent from "@/components/ImageComponent"
 
-const NextRelease = () => {
+const NextRelease = (props) => {
   return (
     <div className="mx-auto rounded-lg border-2 border-black bg-gray-400 text-white font-bold rounded-lg border-2 border-black w-11/12 md:w-[560px] p-1 m-1">
       <h1 className="m-1 border-2 border-black bg-indigo-600 rounded-lg text-white text-center font-bold italic">
