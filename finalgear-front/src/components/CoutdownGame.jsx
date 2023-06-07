@@ -34,7 +34,7 @@ const CountdownGame = (props) => {
         className
       )}
     >
-      <div className="flex flex-col justify-between p-1 bg-gray-400 rounded-b-lg text-white font-bold gap-2">
+      <div className="p-1 flex flex-col justify-between bg-gray-400 rounded-b-lg text-white font-bold gap-2">
         <div className="flex gap-2">
           <div className="flex flex-col justify-between">
             <div children className="w-60">

@@ -5,6 +5,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"
 import { AxiosError } from "axios"
 import classNames from "classnames"
 import { Formik, Field, Form, ErrorMessage } from "formik"
+import Link from "next/link"
 import { useRouter } from "next/router"
 import qs from "qs"
 import { useCallback, useState } from "react"
@@ -67,7 +68,7 @@ const signIn = () => {
 
   return (
     <Page>
-      <div className="h-screen p-1 m-1 flex flex-col items-center rounded-md border-2 border-black bg-cover bg-no-repeat bg-center bg-[url('/background/FFXVI1.jpeg')]">
+      <div className="h-full flex flex-col items-center bg-cover bg-no-repeat bg-center bg-[url('/background/FFXVI1.jpeg')]">
         <ul
           className={classNames(
             `mx-auto mt-4 w-1/2 rounded-lg border-2 border-red-600 bg-red-500/30`,
@@ -130,9 +131,21 @@ const signIn = () => {
                   className="text-red-600"
                 />
               </div>
-              <button type="submit" disabled={!isValid || isSubmitting}>
+              <button
+                className="mt-5 px-3 py-2 font-bold text-white text-xs bg-blue-700
+              active:bg-blue-600 border-2 border-blue-700 rounded"
+                type="submit"
+                disabled={!isValid || isSubmitting}
+              >
                 Submit
               </button>
+
+              <Link
+                href="/users/password-forget"
+                className="p-2 text-white hover:underline"
+              >
+                Mot de passe oublié ?
+              </Link>
             </Form>
           )}
         </Formik>

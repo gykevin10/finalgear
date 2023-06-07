@@ -26,15 +26,15 @@ const releases = [
 
 const NextRelease = () => {
   return (
-    <div className="flex rounded-lg justify-between md:w-[430px] mx-auto">
+    <div className="flex justify-between rounded-lg">
       <div className="flex justify-between w-full">
-        <div className="flex flex-col gap-2 border-2 border-black bg-slate-600 rounded-lg w-36 md:w-[370px] mx-auto md:mx-0 lg:mr-32 xl:mr-0">
-          <h1 className="m-1 border-2 border-black bg-indigo-600 rounded-lg text-white text-center font-bold italic">
+        <div className="flex flex-col gap-2 bg-slate-600 border-2 border-black rounded-lg md:w-[400px] mx-auto md:mx-0">
+          <h1 className="m-1 bg-indigo-600 text-white text-center font-bold italic border-2 border-black rounded-lg">
             PROCHAINES SORTIES 🎮
           </h1>
           {releases.map((release, i) => (
             <div
-              className="flex justify-between bg-gray-400 h-18 m-1 rounded-lg"
+              className="m-1 flex justify-between bg-gray-400 border-2 border-black rounded-lg"
               key={i}
             >
               <div className="flex flex-col p-1">

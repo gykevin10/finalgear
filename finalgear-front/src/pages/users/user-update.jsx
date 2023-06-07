@@ -24,12 +24,12 @@ const validationSchema = Yup.object().shape({
 const initialValues = {
   avatar: "",
   avatarFile: "",
-  username1: "",
-  displayName1: "",
-  email1: "",
-  password1: "",
+  username: "",
+  displayName: "",
+  email: "",
+  password: "",
 }
-const userPatch = () => {
+const userUpdate = () => {
   const {
     state: { session },
   } = useAppContext()
@@ -40,7 +40,7 @@ const userPatch = () => {
   const [visible, setVisiblity] = useState(false)
 
   const handleSubmit = useCallback(
-    async ({ email1, username1, displayName1, password1, avatarFile }) => {
+    async ({ email, username, displayName, password, avatarFile }) => {
       setErrors([])
       const result = await api.post(
         "/users/avatar",
@@ -51,7 +51,7 @@ const userPatch = () => {
       console.log(result)
       const userId = session.user.id
 
-      if (!email1 | !username1 | !displayName1 | !password1) {
+      if (!email | !username | !displayName | !password) {
         return
       }
 
@@ -59,15 +59,15 @@ const userPatch = () => {
         const {
           data: { result },
         } = await api.patch(`/users/${userId}`, {
-          email1,
-          username1,
-          displayName1,
-          password1,
+          email,
+          username,
+          displayName,
+          password,
         })
 
         if (result.length !== 0) {
           setSession()
-          router.push("/sign-in")
+          router.push("/users/sign-in")
 
           return
         }
@@ -121,7 +121,7 @@ const userPatch = () => {
               </div>
 
               <div className="flex flex-col w-80">
-                <label className="text-white">Pseudo Discord :</label>
+                <label className="text-white">Pseudo Discord : </label>
                 <div className="flex gap-x-2">
                   <ImageComponent src="/icons/discord.png" className="w-7" />
                   <Field
@@ -176,7 +176,7 @@ const userPatch = () => {
                   <Field
                     type="email"
                     id="email"
-                    name="email1"
+                    name="email"
                     className="w-72 border-2 border-black bg-gray-300 px-2 rounded"
                     placeholder="Entrer votre adresse Email"
                   />
@@ -191,14 +191,14 @@ const userPatch = () => {
                   <Field
                     type="text"
                     id="username"
-                    name="username1"
+                    name="username"
                     className="w-72 border-2 border-black bg-gray-300 px-2 rounded"
                     placeholder="Entrer votre Username"
                   />
                   <ErrorMessage
                     name="username"
                     component="small"
-                    className="text-red-600 "
+                    className="text-red-600"
                   />
                 </div>
 
@@ -207,7 +207,7 @@ const userPatch = () => {
                   <Field
                     type="text"
                     id="displayName"
-                    name="displayName1"
+                    name="displayName"
                     className="w-72 border-2 border-black bg-gray-300 px-2 rounded"
                     placeholder="Entrer votre DisplayName"
                   />
@@ -234,7 +234,7 @@ const userPatch = () => {
                       </span>
                     ) : (
                       <span onClick={handleVisionOff}>
-                        <EyeSlashIcon className=" text-white w-6 h-6 hover:cursor-pointer" />
+                        <EyeSlashIcon className="text-white w-6 h-6 hover:cursor-pointer" />
                       </span>
                     )}
                   </div>
@@ -268,4 +268,4 @@ const userPatch = () => {
   )
 }
 
-export default userPatch
+export default userUpdate

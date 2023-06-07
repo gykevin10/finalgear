@@ -21,9 +21,9 @@ const videos = [
 
 const NextVideos = () => {
   return (
-    <div className="bg-gray-400 flex rounded-lg justify-between w-11/12 h-20 md:w-[390px] mx-auto">
+    <div className="flex bg-gray-400 rounded-lg justify-between w-11/12 h-20 md:w-[390px] mx-auto">
       <div className="flex justify-between place-items-center w-full">
-        <div className="flex flex-col gap-2 border-2 border-black bg-slate-600 rounded-lg">
+        <div className="flex flex-col bg-slate-600 gap-2 border-2 border-black rounded-lg">
           <h1 className="m-1 border-2 border-black bg-indigo-600 rounded-lg text-white text-center font-bold italic">
             PROCHAINES VIDEOS 🔥
           </h1>

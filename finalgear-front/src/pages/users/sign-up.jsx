@@ -1,6 +1,5 @@
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import { useRouter } from "next/router"
-import Page from "../components/Page"
 import { useCallback, useState } from "react"
 import { AxiosError } from "axios"
 import * as yup from "yup"
@@ -13,6 +12,7 @@ import {
   validatePassword,
   validateUsername,
 } from "@/validators"
+import Page from "@/components/Page"
 
 const initialValues = {
   username: "",
@@ -54,7 +54,7 @@ const signUp = () => {
         } = await api.post("/users", { email, username, displayName, password })
 
         if (count) {
-          router.push("/sign-in")
+          router.push("/users/sign-in")
 
           return
         }
@@ -71,7 +71,7 @@ const signUp = () => {
     [router]
   )
   const handleConnexion = () => {
-    router.push("/sign-in")
+    router.push("/users/sign-in")
   }
 
   return (

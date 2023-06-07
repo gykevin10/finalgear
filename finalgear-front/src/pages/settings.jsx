@@ -36,7 +36,7 @@ const settings = () => {
   return (
     <Page>
       <div className="p-10 h-full bg-cover bg-no-repeat bg-center bg-[url('/background/clive.jpeg')]">
-        <h1 className="text-2xl font-bold text-center">Settings</h1>
+        <h1 className="text-white text-2xl font-bold text-center">Settings</h1>
         <div>
           <h2 className="text-xl font-bold text-white">Profil :</h2>
           {session ? (
@@ -55,7 +55,7 @@ const settings = () => {
                 <div className="flex gap-5 justify-center mb-3">
                   <Link
                     className="mt-5 px-3 py-2 font-bold text-white text-xs bg-blue-700 active:bg-blue-600 border-2 border-blue-700 rounded"
-                    href="/user-update"
+                    href="/users/user-update"
                   >
                     Modify
                   </Link>

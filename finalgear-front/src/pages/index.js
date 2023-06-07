@@ -10,27 +10,23 @@ const App = () => {
       <div className="sticky top-0">
         <Header />
       </div>
-      <div className="grow flex justify-between p-1 gap-x-1">
-        <div className="grid w-full md:w-fit grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-2 mt-2 mx-auto xl:mx-0 lg:gap-x-[8.75rem] xl:gap-x-0">
-          <div className="grid grid-cols-1">
-            <iframe
-              className="rounded-xl w-36 md:w-[370px] mx-auto md:mx-0 lg:mr-32 xl:mr-0"
-              src="https://www.youtube.com/embed/ciYYBwdpGGI"
-              title="SQUARE ENIX NEWS - UN BON MOIS DE NEWS ! -SEN#12"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
-            ></iframe>
-            <div>
-              <NextRelease />
-            </div>
-          </div>
+
+      <div className="p-1 m-1 grow flex justify-between">
+        <div className="flex grid grid-cols-1 md:w-fit gap-2 mx-auto xl:mx-0">
+          <iframe
+            className="rounded-xl md:w-[400px] md:h-[200px]"
+            src="https://www.youtube.com/embed/ciYYBwdpGGI"
+            title="SQUARE ENIX NEWS - UN BON MOIS DE NEWS ! -SEN#12"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+          ></iframe>
+          <NextRelease />
         </div>
-        <div className="grid w-full md:w-fit grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-2 mt-2 mx-auto xl:mx-0 lg:gap-x-[8.75rem] xl:gap-x-0">
-          <div className="grid grid-cols-1">
-            <CountdownRace />
-            <NextVideos />
-          </div>
+        <div className="grid grid-cols-1 md:w-fit gap-2 mx-auto xl:mx-0">
+          <CountdownRace />
+          <NextVideos />
         </div>
       </div>
+
       <div className="sticky bottom-0">
         <Footer />
       </div>

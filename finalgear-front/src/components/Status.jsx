@@ -38,7 +38,7 @@ const Status = () => {
         </>
       ) : (
         <button className="text-3xl">
-          <Link href="/sign-up">
+          <Link href="/users/sign-up">
             <UserIcon className="m-2 w-6 h-6 mt-5 text-white" />
           </Link>
         </button>
