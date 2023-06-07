@@ -34,33 +34,37 @@ const CountdownGame = (props) => {
         className
       )}
     >
-      <div className="flex flex-col p-1 bg-gray-400 rounded-b-lg text-black font-bold gap-2">
-        <div className="flex-col">
-          <p className="font-bold text-black">Next Game : FINAL FANTASY XVI</p>
-          <div className="flex justify-betwwen gap-2">
-            <div>
-              <p>DAYS</p>
-              {String(date.getUTCDay()).padStart(2, "0")}
-            </div>
-            <div>
-              <p>HOURS</p>
-              {String(date.getUTCHours()).padStart(2, "0")}
+      <div className="flex flex-col justify-between p-1 bg-gray-400 rounded-b-lg text-white font-bold gap-2">
+        <div className="flex gap-2">
+          <div className="flex flex-col justify-between">
+            <div children className="w-60">
+              <p className="font-bold text-white">
+                Next Game : FINAL FANTASY XVI
+              </p>
             </div>
 
-            <div>
-              <p>MINUTES</p>
-              {String(date.getUTCMinutes()).padStart(2, "0")}
-            </div>
+            <div className="flex justify-betwwen items-center gap-2 w-64">
+              <div>
+                <p>DAYS</p>
+                {String(date.getUTCDay()).padStart(2, "0")}
+              </div>
+              <div>
+                <p>HOURS</p>
+                {String(date.getUTCHours()).padStart(2, "0")}
+              </div>
 
-            <div>
-              <p>SECONDS</p>
-              {String(date.getUTCSeconds()).padStart(2, "0")}
+              <div>
+                <p>MINUTES</p>
+                {String(date.getUTCMinutes()).padStart(2, "0")}
+              </div>
+              <div>
+                <p>SECONDS</p>
+                {String(date.getUTCSeconds()).padStart(2, "0")}
+              </div>
             </div>
-            <ImageComponent
-              className="w-24 justify-end"
-              src="/release/ffxvicover.jpg"
-            />
           </div>
+
+          <ImageComponent className="w-24 h-28" src="/release/ffxvicover.jpg" />
         </div>
       </div>
     </div>

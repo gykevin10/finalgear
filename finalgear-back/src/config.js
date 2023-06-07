@@ -1,4 +1,4 @@
-import "dotenv/config";
+import "dotenv/config"
 
 const config = {
   server: {
@@ -35,6 +35,6 @@ const config = {
       secret: process.env.SECURITY_JWT_SECRET,
     },
   },
-};
+}
 
-export default config;
+export default config

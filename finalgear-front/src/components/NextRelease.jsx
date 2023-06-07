@@ -1,75 +1,62 @@
 import ImageComponent from "@/components/ImageComponent"
 
-const NextRelease = (props) => {
+const releases = [
+  {
+    title: "FINAL FANTASY VII CRISIS CORE REUNION",
+    date: "13/12/2022",
+    support: "PS5/PS4/XBOXSERIES/XBOXONE/SWITCH/PC",
+    site: "Site officiel",
+    name: "crisiscore",
+  },
+  {
+    title: "DISTANT WORLDS MUSIC FROM FINAL FANTASY CORAL",
+    date: "25/02/2023",
+    support: "LE GRAND REX",
+    site: "Site officiel",
+    name: "distantworld",
+  },
+  {
+    title: "FINAL FANTASY XVI",
+    date: "22/06/2023",
+    support: "PS5",
+    site: "Site Officiel",
+    name: "ffxvi",
+  },
+]
+
+const NextRelease = () => {
   return (
-    <div className="mx-auto rounded-lg border-2 border-black bg-gray-400 text-white font-bold rounded-lg border-2 border-black w-11/12 md:w-[560px] p-1 m-1">
-      <h1 className="m-1 border-2 border-black bg-indigo-600 rounded-lg text-white text-center font-bold italic">
-        NEXT RELEASE
-      </h1>
-
-      <div className="flex flex-row justify-start">
-        <div className="mr-2 ml-1 mb-1 ">
-          <ImageComponent
-            src="/release/ff7cc.jpg"
-            className="w-[128px] h-[180px]"
-          />
-        </div>
-        <div className="flex flex-col mr-2">
-          <h2>FINAL FANTASY VII CRISIS CORE REUNION</h2>
-          <p>13/12/2022</p>
-          <p className="text-xs">PS5/PS4/XBOXSERIES/XBOXONE/SWITCH/PC</p>
-          <p>
-            <a
-              href="https://store.eu.square-enix-games.com/fr_FR/product/769892/crisis-core-final-fantasy-vii-reunion"
-              className="underline"
+    <div className="flex rounded-lg justify-between md:w-[430px] mx-auto">
+      <div className="flex justify-between w-full">
+        <div className="flex flex-col gap-2 border-2 border-black bg-slate-600 rounded-lg w-36 md:w-[370px] mx-auto md:mx-0 lg:mr-32 xl:mr-0">
+          <h1 className="m-1 border-2 border-black bg-indigo-600 rounded-lg text-white text-center font-bold italic">
+            PROCHAINES SORTIES 🎮
+          </h1>
+          {releases.map((release, i) => (
+            <div
+              className="flex justify-between bg-gray-400 h-18 m-1 rounded-lg"
+              key={i}
             >
-              Site officiel
-            </a>
-          </p>
-        </div>
-      </div>
+              <div className="flex flex-col p-1">
+                <h1 className="text-xs text-white font-bold">
+                  {release.title}
+                </h1>
+                <p className="text-xs text-white">{release.date}</p>
+                <p className="text-xs text-white">{release.support}</p>
+                <a
+                  href="https://fr.store.square-enix-games.com/crisis-core-_final-fantasy-vii_-reunion"
+                  className="underline text-white"
+                >
+                  <p className="text-xs text-white">{release.site}</p>
+                </a>
+              </div>
 
-      <div className="flex flex-row justify-start">
-        <div className="mr-2 ml-1 mb-1">
-          <ImageComponent
-            src="/release/distantworld.jpg"
-            className="w-[140px] h-[180px]"
-          />
-        </div>
-        <div className="flex flex-col mr-2">
-          <h3>DISTANT WORLDS MUSIC FROM FINAL FANTASY CORAL</h3>
-          <p>25/02/2023</p>
-          <p className="text-xs">LE GRAND REX</p>
-          <p>
-            <a
-              href="https://www.fnacspectacles.com/artist/distant-worlds/?gclsrc=aw.ds&kClkId=221123154712475327&kVsId=221123154712475035&gclid=CjwKCAiApvebBhAvEiwAe7mHSKlu5Q-XDq3Mb-qj-rpeo3ZuNv0za8g62mxe8uB0RVSM3hh3CAtodxoCiFwQAvD_BwE"
-              className="underline"
-            >
-              Tickets
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <div className="flex flex-row justify-start">
-        <div className="mr-2 ml-1 mb-1 ">
-          <ImageComponent
-            src="/release/ffxvicover.jpg"
-            className="w-[128px] h-[180px]"
-          />
-        </div>
-        <div className="flex flex-col mr-2">
-          <h2>FINAL FANTASY XVI</h2>
-          <p>22/06/2023</p>
-          <p className="text-xs">PS5</p>
-          <p>
-            <a
-              href="https://store.eu.square-enix-games.com/fr_FR/product/810801/final-fantasy-xvi-ps5"
-              className="underline"
-            >
-              Site officiel
-            </a>
-          </p>
+              <ImageComponent
+                className="flex ml-auto m-1 p-1 w-20 h-28"
+                src={`/release/${release.name}cover.jpg`}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

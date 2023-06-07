@@ -35,20 +35,22 @@ const settings = () => {
 
   return (
     <Page>
-      <div className="p-10 h-full bg-cover bg-no-repeat bg-center bg-[url('/background/crisiscorereunion.webp')]">
+      <div className="p-10 h-full bg-cover bg-no-repeat bg-center bg-[url('/background/clive.jpeg')]">
         <h1 className="text-2xl font-bold text-center">Settings</h1>
         <div>
-          <h2 className="text-xl font-bold">Profil :</h2>
+          <h2 className="text-xl font-bold text-white">Profil :</h2>
           {session ? (
-            <div className="px-5 flex flex-col gap-5 border-2 border-black w-52">
-              <div className="text-center font-bond underline">
+            <div className="px-5 flex flex-col gap-5 border-2 border-white w-52">
+              <div className="text-center font-bold underline">
                 {session.user.role === "ADMIN" ? (
                   <h3 className=" skew-y-12">ADMINISRATOR</h3>
                 ) : null}
               </div>
-              <h4>Name : {session.user.username}</h4>
-              <h5>DisplayName : {session.user.displayName}</h5>
-              <h6>Email : {session.user.email}</h6>
+              <h4 className="text-white">Name : {session.user.username}</h4>
+              <h5 className="text-white">
+                DisplayName : {session.user.displayName}
+              </h5>
+              <h6 className="text-white">Email : {session.user.email}</h6>
               <div className="flex">
                 <div className="flex gap-5 justify-center mb-3">
                   <Link

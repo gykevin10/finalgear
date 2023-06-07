@@ -94,7 +94,9 @@ const userPatch = () => {
   return (
     <Page>
       <div className="p-10 h-full bg-cover bg-no-repeat bg-[url('/background/FFXIV1.jpg')]">
-        <h1 className="text-2xl font-bold text-center">Update Informations</h1>
+        <h1 className="text-2xl font-bold text-white text-center">
+          Update Informations
+        </h1>
         {errors.length ? (
           <div className="rounded-lg border-4 border-red-600 mb-4 flex flex-col gap-4 p-4">
             {errors.map((error) => (
@@ -119,7 +121,7 @@ const userPatch = () => {
               </div>
 
               <div className="flex flex-col w-80">
-                <label className="text-black">Pseudo Discord :</label>
+                <label className="text-white">Pseudo Discord :</label>
                 <div className="flex gap-x-2">
                   <ImageComponent src="/icons/discord.png" className="w-7" />
                   <Field
@@ -135,7 +137,7 @@ const userPatch = () => {
                     className="text-red-600"
                   />
                 </div>
-                <label className="form-check-label text-black">
+                <label className="form-check-label text-white">
                   Pseudo FFXIV :
                 </label>
                 <div className="flex gap-x-2">
@@ -166,11 +168,11 @@ const userPatch = () => {
             </Form>
           </Formik>
 
-          <div className="flex bg-red-600">
+          <div className="flex">
             <Formik initialValues={initialValues} onSubmit={handleSubmit}>
               <Form>
                 <div className="flex flex-col">
-                  <label>Email : </label>
+                  <label className="text-white">Email : </label>
                   <Field
                     type="email"
                     id="email"
@@ -185,7 +187,7 @@ const userPatch = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label>Username : </label>
+                  <label className="text-white">Username : </label>
                   <Field
                     type="text"
                     id="username"
@@ -201,7 +203,7 @@ const userPatch = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <label>DisplayName : </label>
+                  <label className="text-white">DisplayName : </label>
                   <Field
                     type="text"
                     id="displayName"
@@ -217,7 +219,7 @@ const userPatch = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <label>Password : </label>
+                  <label className="text-white">Password : </label>
                   <div className="flex gap-x-2">
                     <Field
                       type={visible ? "text" : "password"}
@@ -228,11 +230,11 @@ const userPatch = () => {
                     />
                     {visible ? (
                       <span onClick={handleVisionOn}>
-                        <EyeIcon className="w-6 h-6 hover:cursor-pointer" />
+                        <EyeIcon className="w-6 h-6 text-white hover:cursor-pointer" />
                       </span>
                     ) : (
                       <span onClick={handleVisionOff}>
-                        <EyeSlashIcon className="w-6 h-6 hover:cursor-pointer" />
+                        <EyeSlashIcon className=" text-white w-6 h-6 hover:cursor-pointer" />
                       </span>
                     )}
                   </div>
