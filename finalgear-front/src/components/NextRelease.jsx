@@ -28,7 +28,7 @@ const NextRelease = () => {
   return (
     <div className="flex justify-between rounded-lg">
       <div className="flex justify-between w-full">
-        <div className="flex flex-col gap-2 bg-slate-600 border-2 border-black rounded-lg md:w-[400px] mx-auto md:mx-0">
+        <div className="flex flex-col gap-2 bg-slate-600 border-2 border-black rounded-lg md:w-[370px] mx-auto md:mx-0">
           <h1 className="m-1 bg-indigo-600 text-white text-center font-bold italic border-2 border-black rounded-lg">
             PROCHAINES SORTIES 🎮
           </h1>

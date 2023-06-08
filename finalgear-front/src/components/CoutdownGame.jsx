@@ -30,7 +30,7 @@ const CountdownGame = (props) => {
   return (
     <div
       className={classNames(
-        "flex flex-col w-11/12 h-fit mx-auto md:mx-0 md:w-[390px] p-2 gap-2 bg-gray-400 text-sm rounded-lg border-2 border-black",
+        "flex flex-col w-11/12 h-fit mx-auto md:w-[370px] p-2 gap-2 bg-gray-400 text-sm rounded-lg border-2 border-black",
         className
       )}
     >

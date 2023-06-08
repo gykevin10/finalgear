@@ -7,7 +7,7 @@ import { useState } from "react"
 const initialValues = {
   email: "",
 }
-const PasswordForget = () => {
+const forgotPassword = () => {
   const [isactive, setIsactive] = useState(false)
   const handleSubmit = async ({ email }) => {
     if (!email) {
@@ -95,4 +95,4 @@ const PasswordForget = () => {
     </Page>
   )
 }
-export default PasswordForget
+export default forgotPassword

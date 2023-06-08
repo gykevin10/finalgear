@@ -58,6 +58,54 @@ const makeSessionRoutes = ({ app, db }) => {
       res.send({ result: [{ jwt }] })
     }
   )
+
+  // QUESTION POUR ALIX
+  // app.patch(
+  //   "/reset-password",
+  //   validate({
+  //     body: {
+  //       password: validatePassword.required(),
+  //     },
+  //   }),
+  //   async (req, res) => {
+  //     const { password } = req.body
+  //     const resetPassword = await User.$query()
+  //       .patch({ password })
+  //       .returning("*")
+
+  //     res.send({ result: resetPassword })
+  //   }
+  // )
+
+  // app.get(
+  //   "/forgot-password",
+  //   validate({
+  //     body: {
+  //       email: validateEmail.required(),
+  //     },
+  //   }),
+  //   async (req, res) => {
+  //     const { email } = req.body
+
+  //     if (!email) {
+  //       res.status(401).send({ error: ["Enter your Email"] })
+
+  //       return
+  //     }
+
+  //     const user = await User.query().findOne({
+  //       email: email,
+  //     })
+
+  //     if (!user) {
+  //       send401(res)
+
+  //       return
+  //     }
+
+  //     res.send({ user })
+  //   }
+  // )
 }
 
 export default makeSessionRoutes

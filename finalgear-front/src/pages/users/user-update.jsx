@@ -224,7 +224,7 @@ const userUpdate = () => {
                     <Field
                       type={visible ? "text" : "password"}
                       id="password"
-                      name="password1"
+                      name="password"
                       className="w-64 border-2 border-black bg-gray-300 px-2 rounded"
                       placeholder="Entrer votre Password"
                     />

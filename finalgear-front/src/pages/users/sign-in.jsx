@@ -141,7 +141,7 @@ const signIn = () => {
               </button>
 
               <Link
-                href="/users/password-forget"
+                href="/users/forgot-password"
                 className="p-2 text-white hover:underline"
               >
                 Mot de passe oublié ?
