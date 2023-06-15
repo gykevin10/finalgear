@@ -1,13 +1,13 @@
 import NextRelease from "@/components/NextRelease"
 import NextVideos from "@/components/NextVideos"
-import CountdownRace from "@/components/CoutdownGame"
+import CountdownGame from "@/components/CoutdownGame"
 import Page from "@/components/Page"
 
 const App = () => {
   return (
     <Page>
-      <div className="flex justify-between m-1 bg-cover bg-no-repeat bg-center bg-[url('/background/joshua.jpeg')]">
-        <div className="flex flex-col">
+      <div className="flex flex-col md:flex-row justify-between bg-cover bg-no-repeat bg-center bg-[url('/background/jill.jpeg')]">
+        <div className="m-1 flex flex-col gap-2">
           <iframe
             className="rounded-xl md:w-[370px] md:h-[180px]"
             src="https://www.youtube.com/embed/ciYYBwdpGGI"
@@ -16,8 +16,8 @@ const App = () => {
           ></iframe>
           <NextRelease />
         </div>
-        <div className="grid grid-cols-1 gap-2 mt-2 mx-auto md:w-fit xl:mx-0 lg:gap-x-[8.75rem] xl:gap-x-0">
-          <CountdownRace />
+        <div className="m-1 flex flex-col gap-2">
+          <CountdownGame />
           <NextVideos />
         </div>
       </div>

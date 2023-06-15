@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Link from "next/link"
 import { Bars3Icon, XCircleIcon } from "@heroicons/react/24/solid"
 import { useRouter } from "next/router"
+import ImageComponent from "@/components/ImageComponent"
 
 const navMenu = [
   {
@@ -58,10 +59,9 @@ const Navbar = () => {
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <div className="flex items-center py-4 md:px-10 px-7">
-                <img
-                  className="h-14 w-14 mr-3"
-                  src="https://pbs.twimg.com/profile_images/1417635808853565440/d6fFCTfg_400x400.jpg"
-                  alt="finalgear"
+                <ImageComponent
+                  className="w-14 h-14 mr-3"
+                  src="/iconsyt/finalgearlogo.jpg"
                 />
                 <button
                   className="font-blod text-2xl font-[poppins] text-white underline"
@@ -116,6 +116,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
       <div className={`${isOpen ? "block" : "hidden"} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {navMenu.map((item, index) => {
