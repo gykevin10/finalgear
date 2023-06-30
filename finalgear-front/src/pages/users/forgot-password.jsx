@@ -1,35 +1,25 @@
 import Link from "@/components/Link"
 import Page from "@/components/Page"
 import api from "@/services/api"
+import classNames from "classnames"
 import { ErrorMessage, Field, Form, Formik } from "formik"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 
 const initialValues = {
   email: "",
 }
 const forgotPassword = () => {
   const [isactive, setIsactive] = useState(false)
-  const handleSubmit = async ({ email }) => {
+  const handleSubmit = useCallback(async ({ email }) => {
     if (!email) {
       return
     }
 
-    setIsactive(true)
+    setIsactive(!isactive)
     const {
       data: { result },
-    } = await api.get(`/users/${email}`)
-
-    if (result.length !== 0) {
-      try {
-        const { data } = await api.post(`/api/email`, {
-          email,
-        })
-        console.log("msg sensed")
-      } catch (err) {
-        console.log("errorrrrrr")
-      }
-    }
-  }
+    } = await api.post("/forgot-password", { email })
+  })
 
   return (
     <Page>
@@ -41,34 +31,44 @@ const forgotPassword = () => {
           <div className="p-4 bg-black bg-opacity-40 rounded-2xl">
             {!isactive && (
               <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                <Form className="flex flex-col items-center">
-                  <div className="flex">
-                    <label className="text-white">Email : </label>
-                    <Field
-                      type="input"
-                      id="email"
-                      name="email"
-                      className="border-2 border-black px-2 rounded"
-                      placeholder="xxxx@xxxx.com"
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="small"
-                      className="text-red-600"
-                    />
-                  </div>
-                  <div className="flex gap-10">
-                    <Link
-                      className="mt-5 px-3 py-2 font-bold text-white text-xs bg-blue-700 active:bg-blue-600 border-2 border-blue-700 rounded"
-                      href="/users/sign-in"
-                    >
-                      Return
-                    </Link>
-                    <button className="mt-5 px-3 py-2 font-bold text-white text-xs bg-red-700 active:bg-red-600 border-2 border-red-700 rounded">
-                      Confirm
-                    </button>
-                  </div>
-                </Form>
+                {({ isSubmitting, isValid }) => (
+                  <Form className="flex flex-col items-center">
+                    <div className="flex">
+                      <label className="text-white">Email : </label>
+                      <Field
+                        type="input"
+                        id="email"
+                        name="email"
+                        className="border-2 border-black px-2 rounded"
+                        placeholder="xxxx@xxxx.com"
+                      />
+                      <ErrorMessage
+                        name="email"
+                        component="small"
+                        className="text-red-600"
+                      />
+                    </div>
+                    <div className="flex gap-10">
+                      <Link
+                        className="mt-5 px-3 py-2 font-bold text-white text-xs bg-blue-700 active:bg-blue-600 border-2 border-blue-700 rounded"
+                        href="/users/sign-in"
+                      >
+                        Return
+                      </Link>
+                      <button
+                        disabled={!isValid || isSubmitting}
+                        className={
+                          (classNames(
+                            "mt-5 px-3 py-2 font-bold text-white text-xs  active:bg-red-600 border-2 border-red-700 rounded"
+                          ),
+                          "disabled:bg-red-700")
+                        }
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  </Form>
+                )}
               </Formik>
             )}
 

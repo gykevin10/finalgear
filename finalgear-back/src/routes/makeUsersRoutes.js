@@ -1,3 +1,4 @@
+import Token from "../db/models/Token.js"
 import User from "../db/models/User.js"
 import filterDBResult from "../filterDBResult.js"
 import hashPassword from "../hashPassword.js"
@@ -14,6 +15,7 @@ import {
   validateRole,
   validateUsername,
 } from "../validators.js"
+import makeRandCharChain from "../makeRandCharChain.js"
 
 const makeUsersRoutes = ({ app }) => {
   // CREATE
@@ -161,6 +163,7 @@ const makeUsersRoutes = ({ app }) => {
       res.send({ result: updatedRole, count: 1 })
     }
   )
+
   // DELETE
   app.delete(
     "/users/:userId",
@@ -178,6 +181,92 @@ const makeUsersRoutes = ({ app }) => {
       const user = await User.query().deleteById(userId).throwIfNotFound()
 
       res.send({ result: filterDBResult([user]), count: 1 })
+    }
+  )
+  app.patch(
+    "/reset-password",
+    validate({
+      body: {
+        newPassword: validatePassword.required(),
+      },
+    }),
+    async (req, res) => {
+      const { id, newPassword } = req.body
+
+      const token = await Token.query().findById(id).returning("*")
+
+      if (!token) {
+        res.status(404).send({
+          error: [
+            "Ticket not found, please go on the sign-in page or follow the last link received by email.",
+          ],
+          statu: 404,
+        })
+
+        return
+      }
+
+      const [passwordHash, passwordSalt] = hashPassword(newPassword)
+
+      const user = await User.query()
+        .findById(token.userId)
+        .update({
+          passwordHash,
+          passwordSalt,
+        })
+        .returning("*")
+
+      await token.$query().delete()
+
+      res.send({ result: filterDBResult([user]), count: 1 })
+    }
+  )
+  app.post(
+    "/forgot-password",
+    validate({
+      body: {
+        email: validateEmail.required(),
+      },
+    }),
+    async (req, res) => {
+      const { email } = req.body
+
+      if (!email) {
+        res.status(401).send({ error: ["Enter your Email"] })
+
+        return
+      }
+
+      const user = await User.query().findOne({
+        email,
+      })
+
+      if (!user) {
+        send404(res)
+
+        return
+      }
+
+      const oldToken = await Token.query()
+        .findOne({ userId: user.id })
+        .returning("*")
+
+      if (oldToken) {
+        await oldToken.$query().delete()
+      }
+
+      const id = makeRandCharChain()
+
+      const token = await Token.query()
+        .insert({
+          id,
+          userId: user.id,
+        })
+        .returning("*")
+
+      // SendPasswordMail(user.email, id)
+
+      res.send("An email have been seen.")
     }
   )
 }

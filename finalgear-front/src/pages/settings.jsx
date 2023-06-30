@@ -69,7 +69,7 @@ const settings = () => {
                 </div>
 
                 {isactive && (
-                  <div className="w-full h-screen absolute top-0 left-0 p-3 rounded-xl flex flex-col items-center">
+                  <div className="w-full h-screen bg-black/20 absolute top-0 left-0 p-3 rounded-xl flex flex-col items-center">
                     <section className="flex flex-col items-center gap-5 h-64 w-64 mt-[150px] pt-10 bg-black bg-opacity-60 rounded-2xl">
                       <ExclamationTriangleIcon className="text-white w-20 h-20" />
                       <p className="text-white font-bold text-2xl pb-2 text-center">
