@@ -55,7 +55,7 @@ const settings = () => {
                 <div className="flex gap-5 justify-center mb-3">
                   <Link
                     className="mt-5 px-3 py-2 font-bold text-white text-xs bg-blue-700 active:bg-blue-600 border-2 border-blue-700 rounded"
-                    href="/users/user-update"
+                    href="/settingsTest"
                   >
                     Modify
                   </Link>
