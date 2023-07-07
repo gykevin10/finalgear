@@ -8,7 +8,9 @@ const Page = (props) => {
     <div className="h-screen flex flex-col">
       <Header />
 
-      <article className="grow overflow-y-auto">{children}</article>
+      <article className="grow overflow-y-auto flex flex-col w-full">
+        {children}
+      </article>
 
       <Footer />
     </div>

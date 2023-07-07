@@ -79,10 +79,41 @@ const makeUsersRoutes = ({ app }) => {
       res.send({ result: filterDBResult([user]), count: 1 })
     }
   )
+  app.get(
+    "/user-avatar/:id",
+    validate({
+      params: {
+        id: validateId.required(),
+      },
+    }),
+    async (req, res) => {
+      const { id } = req.params
+      const user = await User.query()
+        .findById(id)
+        .returning("avatar")
+        .throwIfNotFound()
+
+      res.send(filterDBResult([user]))
+    }
+  )
+
+  app.get(
+    "/own-user/:id",
+    validate({
+      params: {
+        id: validateId.required(),
+      },
+    }),
+    async (req, res) => {
+      const { id } = req.params
+      const user = await User.query().findById(id).throwIfNotFound()
+
+      res.send(user)
+    }
+  )
   // UPDATE partial
   app.patch(
     "/users/:userId",
-    auth(),
     validate({
       params: {
         userId: validateId.required(),
@@ -98,12 +129,7 @@ const makeUsersRoutes = ({ app }) => {
       const {
         params: { userId },
         body: { email, username, password, displayName },
-        session,
       } = req
-
-      if (userId !== session.user.id) {
-        hasAccess(req.session, "ADMIN")
-      }
 
       const user = await User.query().findById(userId).throwIfNotFound()
 

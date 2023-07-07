@@ -1,4 +1,6 @@
 import { useAppContext } from "@/components/AppContext"
+import AvatarComponent from "@/components/AvatarComponent"
+import ImageComponent from "@/components/ImageComponent"
 import { ArrowLeftOnRectangleIcon, UserIcon } from "@heroicons/react/24/solid"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -27,15 +29,16 @@ const Status = () => {
 
   return (
     <div className="flex">
-      <div className="inline-flex fixed top-5 right-0">
+      <div className="inline-flex my-auto">
         {user ? (
           <>
-            <button className="mr-2 my-auto text-white">
-              <Link href={`/users/${user.id}`}>{user.displayName}</Link>
-            </button>
             <button onClick={handleClick}>
               <ArrowLeftOnRectangleIcon className="text-white w-6 h-6 mr-3" />
             </button>
+            <button className="mr-3 text-white">
+              <Link href="/settings">{user.displayName}</Link>
+            </button>
+            <AvatarComponent userId={user.id} />
           </>
         ) : (
           <button className="text-3xl">
