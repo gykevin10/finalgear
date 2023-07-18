@@ -1,6 +1,5 @@
 import { useAppContext } from "@/components/AppContext"
 import AvatarComponent from "@/components/AvatarComponent"
-import ImageComponent from "@/components/ImageComponent"
 import { ArrowLeftOnRectangleIcon, UserIcon } from "@heroicons/react/24/solid"
 import Link from "next/link"
 import { useRouter } from "next/router"

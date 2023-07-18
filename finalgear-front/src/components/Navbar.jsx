@@ -20,7 +20,6 @@ const navMenu = [
   { parent: "Iceberg", href: "/iceberg" },
   { parent: "Les dossiers de Corcicasse", href: "/corsimania" },
   { parent: "Triple Triad FFXIV", href: "/cardsCollection" },
-  { parent: "notion", href: "/google" },
 ]
 
 const Navbar = () => {
