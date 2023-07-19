@@ -159,10 +159,10 @@ const settings = () => {
               </div>
 
               <label className="form-check-label text-white">
-                Pseudo FFXIV :
+                Pseudo FFXIV : 
               </label>
               <div className="flex gap-x-2">
-                <ImageComponent src="/images/FFXIVLOGO.png" className="w-7" />
+                <ImageComponent src="/icons/FFXIVLOGO.png" className="w-7" />
                 <Field
                   type="text"
                   id="pseudo ffxiv"
