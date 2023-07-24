@@ -186,16 +186,14 @@ const settings = () => {
                 </button>
               </div>
 
-              <div className="">
-                <button
-                  className="flex gap-2 mt-5 px-3 py-2 font-bold text-white text-xs text-center bg-red-700 active:bg-red-600 border-2 border-red-700 rounded"
-                  onClick={handleIsActive}
-                  type="button"
-                >
-                  <TrashIcon className="w-6 h-6" />
-                  Delete account
-                </button>
-              </div>
+              <button
+                className="flex gap-2 mt-5 px-3 py-2 font-bold text-white text-xs bg-red-700 active:bg-red-600 border-2 border-red-700 rounded"
+                onClick={handleIsActive}
+                type="button"
+              >
+                <TrashIcon className="w-6 h-6" />
+                Delete account
+              </button>
 
               {isActive && (
                 <div className="w-full h-screen bg-black/20 absolute top-0 left-0 p-3 rounded-xl flex flex-col items-center">
